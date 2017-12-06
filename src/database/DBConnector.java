@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author badi
+ * @author ken
  */
 
 
@@ -27,6 +27,7 @@ public class DBConnector {
 
     /**
      * @param args the command line arguments
+     * @throws java.sql.SQLException
      */
     public static void main(String[] args) throws SQLException {
         
@@ -46,9 +47,7 @@ public class DBConnector {
                 studentId = scanner.nextInt();
                 cop.setStudentID(studentId);
                 boolean commit = cop.archiveRecord(studentId);
-                
-                // if archiving returns false, we do not proceed to delete the record, 
-                // since the trasactoin will not be autonomous 
+                 
                 
                 if (commit){                        
                         cop.removeRecord(studentId);
@@ -56,15 +55,14 @@ public class DBConnector {
             break;
                 
                 case 'U':
-                System.out.println("Please enter student's ID number to be updated:");
+                System.out.println("Please enter student's ID number to update:");
                 studentId = scanner.nextInt();
                 cop.setStudentID(studentId);
                 
-                // Before we update the record, we shall archive it in the old table
+           
                 
                 commit = cop.archiveRecord(studentId);
-                // if archiving returns false, we do not proceed to update, 
-                //since the trasactoin will nt be autonomous 
+                 
                 
                     if (commit){
                         cop.updateRecord();
@@ -78,7 +76,7 @@ public class DBConnector {
         }
     }
     
-    // Method used to get the details of a new student to add to the database. 
+     
     
     static void getDets() {
 
@@ -106,7 +104,7 @@ public class DBConnector {
             cop.save();
             
         
-        // Loop to get more students to register, while saving them.            
+                    
         System.out.println("Are you done registering students?\n ('Y'/'N') ");
         choice = scanner.next().trim().charAt(0);
         
