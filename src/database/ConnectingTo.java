@@ -11,13 +11,11 @@ import java.sql.SQLException;
 
 /**
  *
- * @author badi
+ * @author Ken
  */
 public class ConnectingTo {
     private Connection con = null;
 
-    // Connection method, used throughout the project by different classes. 
-    // this method returns a connection for use 
     
     public Connection connector(){
                 
@@ -31,7 +29,7 @@ public class ConnectingTo {
             
                 try{
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3306"
-                        + "/ics2101?autoReconnect=true&useSSL=false","root", "%B@d!k3nji1%");
+                        + "/ics2101?autoReconnect=true&useSSL=false","root", "");
                 con.setAutoCommit(false);
                 }catch(SQLException e) {
                 System.out.println("Connection Failed! Check output console");
@@ -39,14 +37,14 @@ public class ConnectingTo {
                 return con;
                 }
                             if (con != null) {
-                            //System.out.println("You made it, take control your database now!");
+                            System.out.println("You made it, take control your database now!");
                             } else {
                             System.out.println("Failed to make connection!");
                             }
                             return con;
     }
     
-    // This method closes the DB connection
+   
     public void closeDB(){
                try{
                    con.close();
